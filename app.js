@@ -8,6 +8,10 @@ const config = require('./config.json');
 const dbUtil = require('./model/dbUtil.js');
 const users = dbUtil.users;
 const app = express();
+const crypto = require('crypto');
+const algorithm = config.encryptionAlgo;
+const password = config.encryptionSecret;
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -18,7 +22,7 @@ app.use('/v1', index);
 app.get('/setup', function(req, res) {
 
 	// create a sample user
-	var usersObject = new users({ username: config.username, password: config.password});
+	var usersObject = new users({ username: config.username, password: encrypt(config.password)});
 	usersObject.save(function(err) {
 		if (err){
 			res.send({success: false,'Error' : err});
@@ -39,7 +43,7 @@ app.post('/authenticate', function(req, res) {
 			res.json({ success: false, message: 'Authentication failed. User not found.' });
 		} 
 		else if (user) {
-			if (user.password != req.body.password) {
+			if (user.password != encrypt(req.body.password)) {
 				res.json({ success: false, message: 'Authentication failed. Wrong password.' });
 			} 
 			else {
@@ -72,4 +76,10 @@ app.use(function(err, req, res, next) {
   res.send({'error' : 'Page Not found'});
 });
 
+function encrypt(text){
+  let cipher = crypto.createCipher(algorithm,password)
+  let crypted = cipher.update(text,'utf8','hex')
+  crypted += cipher.final('hex');
+  return crypted;
+}
 module.exports = app;

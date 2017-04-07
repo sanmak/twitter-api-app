@@ -7,5 +7,7 @@
 	"secret" : "jwtverification",
 	"username" : "user",
 	"password" : "admin",
-	"tokenExpire" : "86400"
+	"tokenExpire" : "86400",
+	"encryptionAlgo" : "aes-256-ctr",
+	"encryptionSecret" : "d6F3Efeq"
 }
