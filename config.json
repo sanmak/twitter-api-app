@@ -1,0 +1,11 @@
+{
+	"mongoConfig" : {
+		"host" : "localhost",
+		"port" : "27017",
+		"db" : "twitter-app"
+	},
+	"secret" : "jwtverification",
+	"username" : "user",
+	"password" : "admin",
+	"tokenExpire" : "86400"
+}
