@@ -10,7 +10,7 @@ A simple twitter based versioning api to post, read, update and delete tweets to
 - 
 ### API's
 
-- To authenticate, keep http method as POST and request to (https://twitter-api-app.herokuapp.com/authenticate). 
+- To authenticate, keep http method as POST and request to (https://twitter-api-app.herokuapp.com/authenticate). Keep username as **user** and password as **admin**.
 - Once authenticated, it will create token. This token will be used for further api operations. Keep headers as x-access-token and put token value in it.
 - To view all tweets : (https://twitter-api-app.herokuapp.com/v1/tweets) and keep http method as GET.
 - To view specific tweets : (https://twitter-api-app.herokuapp.com/v1/tweets/1). Tweet id at the end and keep http method as GET. It will also gives previous versions of tweet.
